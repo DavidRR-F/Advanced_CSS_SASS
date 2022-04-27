@@ -1,0 +1,66 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin text-gradient {
+    background-image: linear-gradient(
+        to right, $color-primary-light, $color-primary-dark
+    );
+    // background gets clipped exactly were the text is
+    // so the background image will be visible only on the text
+    -webkit-background-clip: text;
+    display: inline-block;
+    color: transparent;
+}
+
+@mixin stop-shaking-transform {
+    backface-visibility: hidden;
+}
+
+@mixin center-align-absolute {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// media query manager mixins
+/*
+Breakpoints:
+0 - 600px: Phone
+600 - 900px: Tablet portrait
+900 - 1200px: Tablet landscape
+1200 - 1800px: Normal Styles
+1800px + : Big Desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+Order: base + typography > general layout + grid > page layout > components
+*/
+@mixin respond($breakpoint) {
+    // if directive
+    @if $breakpoint == phone {
+        // use em instead of rem for media queries (best practice)
+        // default font-size = 16px. width = (breakpoint px / default font size px)
+        // only screen: media query only apllies to screens
+        @media only screen and (max-width: 37.5em) { // 600px
+            // used to pass entire block of code to mixin
+            @content };
+    }
+    @if $breakpoint == tab-port {  // 900px
+        @media only screen and (max-width: 56.25em) { @content };
+    }
+    @if $breakpoint == tab-land { // 1200px
+        @media only screen and (max-width: 75em) { @content };
+    }
+    @if $breakpoint == big-desktop { // 1800px
+        @media only screen and (min-width: 112.5em) { @content };
+    }
+}

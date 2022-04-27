@@ -1,0 +1,56 @@
+/*Partial scss files will have sccs code that is imported to the main scss file and titles 
+files start with underscores part of the 7-1 architecture */
+
+/* Universal selector that applies to ever element on the page */
+/* browers add margins and padding byfulet so to ingnore them 
+set them to 0 universally */
+/* box-sizing: changes box model so that borders and padding 
+are no longer added to total width and height*/
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* force inheritance of box sizing (common practice for universal selector)*/
+    box-sizing: inherit;
+}
+/* rem: is a mesurement of pixels relative to root font size
+    which means if we change the root font size then all rem units will also change
+    (super useful for modile scal)
+*/
+html {
+    /* root font size (default broswer font size is 16 px) 
+        we set root font size to a precentage of the default brower size
+        for accessability (users can change browser font size) (best practice)
+    */
+    // defines what 1rem is
+    font-size: 62.5%; /*10px*/
+
+    // order matters: largest to smallest
+    @include respond(tab-land) { // width < 1200px
+        font-size: 56.25%; // 1rem = 9px (9/16)
+    }
+
+    @include respond(tab-port) { // width < 900px
+        font-size: 50%; // 1rem = 8px (8/16)
+    }
+
+    @include respond(big-desktop) { //width > 1800px
+        font-size: 75%; // 1rem = 12px (12/16)
+    }
+}
+/* properties related to font are inherited so we set font styles
+ in body */
+ body{
+    box-sizing: border-box;
+    padding: 3rem;
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
+}
+// color on selected text
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}

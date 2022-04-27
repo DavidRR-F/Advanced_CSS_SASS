@@ -1,0 +1,95 @@
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+    /* determines if a back part of an element is visible to user
+    used to stop end shaking in animation */
+    backface-visibility: hidden;
+    margin-bottom: 6rem;
+
+    &--main{
+        display: block;
+        font-size: 6.2rem;
+        font-weight: 400;
+        letter-spacing: 4rem;
+
+        /* cheating cause wont center align */
+        padding-left: 1.5rem;
+        
+        /* initialize animation */
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+
+        @include respond(phone) {
+            letter-spacing: 1rem;
+            font-family: 5rem;
+        }
+         
+        /* 
+        animation-delay: 3s; delay before animation
+        animation-iteration-count: 3; times animation active
+        animation-timing-function: ease-out adjusts timing of animation
+        */
+    }
+    
+    &--sub{
+        display: block;
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: 1.75rem;
+        /* initialize animation */
+        animation: moveInRight 1s ease-out;
+
+        @include respond(phone) {
+            letter-spacing: .5rem;
+        }
+    }
+}
+
+/* properties related to font are inherited so we set font styles
+ in body */
+ body{
+     /* use Lato else use sans-serif */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /* font-size: 16px; */
+    /* makes line height 1.7 times bigger than default */
+    line-height: 1.7;
+    color: $color-grey-dark;
+}
+
+.heading-secondary {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    @include text-gradient;
+    transition: all .2s;
+    letter-spacing: .2rem;
+
+    @include respond(tab-port) {
+        font-size: 3rem;
+    }
+
+    @include respond(phone) {
+        font-size: 2.5rem;
+    }
+
+    &:hover {
+        transform: skewY(2deg) skewX(2deg);
+        text-shadow: .5rem 1rem 2rem rgba($color-black, .5);
+    }
+}
+
+.heading-tertiary {
+    font-size: $default-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.paragraph {
+    font-size: $default-font-size;
+
+    &:not(:last-child){
+        margin-bottom: 3rem;
+    }
+}
